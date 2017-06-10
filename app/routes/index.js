@@ -1,44 +1,54 @@
 'use strict';
 
 var path = process.cwd();
-var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
+
+var NavController = require(path + '/app/controllers/navController.js');
 
 module.exports = function (app, passport) {
 
+	var logged = false;
+
 	function isLoggedIn (req, res, next) {
+		console.log(NavController);
 		if (req.isAuthenticated()) {
-			return next();
+			console.log("logged in");
+			//NavController.changeNav(true);
+			logged = true;
 		} else {
-			res.redirect('/login');
-		}
+			//res.redirect('/login');
+			console.log("not logged in");
+			//NavController.changeNav(false);
+			logged = false;
+		} return next();
+	}
+	function getLogged() {
+		return logged;
 	}
 
-	var clickHandler = new ClickHandler();
-
-	app.route('/')
+	app.route('/') // removed isloggedin
 		.get(isLoggedIn, function (req, res) {
-			res.sendFile(path + '/public/index.html');
+			res.render('index', {logged: getLogged()});
 		});
 
 	app.route('/login')
 		.get(function (req, res) {
-			res.sendFile(path + '/public/login.html');
+			res.redirect('/auth/github');
 		});
 
-	app.route('/logout')
+	app.route('/signout')
 		.get(function (req, res) {
 			req.logout();
-			res.redirect('/login');
+			res.redirect('/');
 		});
 
-	app.route('/profile')
-		.get(isLoggedIn, function (req, res) {
-			res.sendFile(path + '/public/profile.html');
+	app.route('/mypolls') // removed isloggedin
+		.get(function (req, res) {
+			res.render('mypolls', {logged: getLogged()});
 		});
 
-	app.route('/api/:id')
-		.get(isLoggedIn, function (req, res) {
-			res.json(req.user.github);
+	app.route('/newpoll') // removed isloggedin
+		.get(function (req, res) {
+			res.render('newpoll', {logged: getLogged()});
 		});
 
 	app.route('/auth/github')
@@ -47,11 +57,6 @@ module.exports = function (app, passport) {
 	app.route('/auth/github/callback')
 		.get(passport.authenticate('github', {
 			successRedirect: '/',
-			failureRedirect: '/login'
+			failureRedirect: '/'
 		}));
-
-	app.route('/api/:id/clicks')
-		.get(isLoggedIn, clickHandler.getClicks)
-		.post(isLoggedIn, clickHandler.addClick)
-		.delete(isLoggedIn, clickHandler.resetClicks);
 };

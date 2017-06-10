@@ -18,13 +18,17 @@ app.use('/public', express.static(process.cwd() + '/public'));
 app.use('/common', express.static(process.cwd() + '/app/common'));
 
 app.use(session({
-	secret: 'secretClementine',
+	secret: 'secretKLM',
 	resave: false,
 	saveUninitialized: true
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.engine('.html', require('ejs').__express);
+app.set('views', __dirname + '/public');
+app.set('view engine', 'html');
 
 routes(app, passport);
 
