@@ -60,7 +60,7 @@ module.exports = function (app, passport) {
 		.post(isLoggedIn,routeController.newPoll);
 
 	app.route('/savepoll/:id')
-		.post(function (req, res) {
+		.post(isLoggedIn,function (req, res) {
 			routeController.votePoll(req, res, getLogged());
 		});
 

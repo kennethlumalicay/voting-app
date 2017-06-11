@@ -24,7 +24,7 @@ function RouteController () {
 		var ownerId = req.user.github.id;
 		var id = new Date().getTime().toString(16);
 		var title = req.body.title;
-		var choices = req.body.options.split(/ , |, | ,|,/g);
+		var choices = req.body.options.replace(/\./gi, '').split(/ , |, | ,|,/g);
 		choices = choices.map(e=>({choice: e, votes: 0}));
 
 		var newPollItem = new Polls({
