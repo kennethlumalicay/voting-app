@@ -46,6 +46,11 @@ module.exports = function (app, passport) {
 			routeController.getPolls(req,res,'mypolls',getLogged());
 		});
 
+	app.route('/view/:id')
+		.get(function (req, res) {
+			routeController.passPoll(req, res, getLogged());
+		});
+
 	app.route('/newpoll')
 		.get(isLoggedIn,function (req, res) {
 			res.render('newpoll', {logged: getLogged()});
@@ -53,6 +58,11 @@ module.exports = function (app, passport) {
 
 	app.route('/newpoll/submit')
 		.post(isLoggedIn,routeController.newPoll);
+
+	app.route('/savepoll/:id')
+		.post(function (req, res) {
+			routeController.votePoll(req, res, getLogged());
+		});
 
 	app.route('/auth/github')
 		.get(passport.authenticate('github'));

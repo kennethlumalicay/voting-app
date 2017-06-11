@@ -33,6 +33,8 @@ app.set('view engine', 'html');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.enable('trust proxy');
+
 routes(app, passport);
 
 var port = process.env.PORT || 8080;

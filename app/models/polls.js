@@ -8,13 +8,11 @@ var Polls = new Schema({
 		ownerId: String,
 		id: String,
 		title: String,
-		choices: [String]
-	},
-	voted: {
-		github: {
-			id: String
-		}
-	}
+		choices: [{
+					choice: String,
+					votes: {type: Number, default: 0}
+				}]
+	}, votes: {type:[String], default: ['']}
 }, {collection: 'polls'});
 
 module.exports = mongoose.model('Polls', Polls);

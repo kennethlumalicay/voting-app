@@ -1,7 +1,6 @@
 'use strict';
 
 var loggedIn = function(isLoggedIn) {
-	console.log('inside changeNav');
 	var login = $('#login-a') || null;
 	var polls = $('#polls-a') || null;
 	var myPoll = $('#mypolls-a') || null;
