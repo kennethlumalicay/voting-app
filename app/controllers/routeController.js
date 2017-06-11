@@ -48,7 +48,7 @@ function RouteController () {
 		Polls.findOne({ "poll.id" : req.params.id}, function(err, data) {
 			if(err) throw err;
 			else {
-				var arr = data.poll.choices.map(e=>[e.choice,e.votes]);
+				var arr = data.poll.choices.map(e=>[e.choice.replace(/\r|\n/gi, '').trim(),e.votes]);
 				res.render('poll', {
 					logged: logged,
 					pollId: data.poll.id,
