@@ -9,14 +9,13 @@ module.exports = function (app, passport) {
 	var logged = false;
 
 	function isLoggedIn (req, res, next) {
-		console.log(NavController);
 		if (req.isAuthenticated()) {
-			console.log("logged in");
+			console.log("User is logged in.");
 			//NavController.changeNav(true);
 			logged = true;
 		} else {
 			//res.redirect('/login');
-			console.log("not logged in");
+			console.log("User is signed out.");
 			//NavController.changeNav(false);
 			logged = false;
 		} return next();
