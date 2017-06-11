@@ -1,0 +1,30 @@
+#new-poll {
+	display: flex;
+	flex-direction: column;
+}
+#title, #options {
+	font-size: 2em;
+	margin-bottom: 10px;
+	padding: 10px;
+	background-color: rgba(255,255,255,0.7);
+	color: black;
+	outline: none;
+	border: 1px solid rgba(0,0,0,0.6);
+}
+#options {
+	font-size: 1.5em;
+	width: 100vh;
+}
+#submit-btn {
+	font-size: 2em;
+	background-color: rgba(175,238,238,0.7);
+	border: 1px solid rgba(0,0,0,0.6);
+	outline: none;
+	color: rgba(0,0,0,0.8);
+	padding: 3px 20px;
+	transition: all 1s ease-in-out;
+}
+#submit-btn:hover {
+	background-color: rgba(175,238,238,1);
+	color: rgba(0,0,0,1);
+}

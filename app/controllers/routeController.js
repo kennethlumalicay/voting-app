@@ -3,6 +3,23 @@
 var Polls = require('../models/polls');
 
 function RouteController () {
+	this.getPolls = function(req, res, view, logged) {
+		var filter = view == 'index' ? {} : { "poll.ownerId" : req.user.github.id };
+		Polls.find(filter,function(err, data) {
+			if(err) throw err;
+			else {
+				var htmlStr = [];
+				data.forEach((val,i) => {
+					htmlStr.unshift('<a href=\''+process.env.APP_URL+'view/'+val.poll.id+'\' class=\'poll-item\'>'+val.poll.title+'?</a>');
+				});
+				res.render(view, {
+					logged: logged,
+					htmlStr: htmlStr.join('')
+				});
+			}
+		})
+	}
+
 	this.newPoll = function (req, res) {
 		var ownerId = req.user.github.id;
 		var id = new Date().getTime().toString(16);
@@ -27,24 +44,6 @@ function RouteController () {
 		res.redirect('/');
 	};
 
-	this.getPolls = function(req, res, view, logged) {
-		var filter = view == 'index' ? {} : { "poll.ownerId" : req.user.github.id };
-		Polls.find(filter,function(err, data) {
-			if(err) throw err;
-			else {
-				console.log(filter);
-				var htmlStr = [];
-				data.forEach((val,i) => {
-					htmlStr.unshift('<a href=\''+process.env.APP_URL+'view/'+val.poll.id+'\' class=\'poll-item\'>'+val.poll.title+'?</a>');
-				});
-				res.render(view, {
-					logged: logged,
-					htmlStr: htmlStr.join('')
-				});
-			}
-		})
-	}
-
 	this.passPoll = function(req, res, logged) {
 		Polls.findOne({ "poll.id" : req.params.id}, function(err, data) {
 			if(err) throw err;
@@ -62,7 +61,6 @@ function RouteController () {
 
 	this.votePoll = function(req, res, logged) {
 		Polls.findOne({ "poll.id" : req.params.id}, function(err, data) {
-			console.log("req.ip", req.ip, "req.ips", req.ips);
 			if(data.votes.includes(req.ip)) {
 				res.send({ anti_double_vote_mechanism: "sending an army of worms to user's address. please vote again in a few hours.",
 						good_guy_link_saver: "here is link to the poll you were viewing (" + process.env.APP_URL+"view/"+req.params.id+")."});
@@ -79,7 +77,6 @@ function RouteController () {
 					else {
 						var index = -1;
 						data.poll.choices = data.poll.choices.map(e=>{
-							console.log(e.choice,newchoice);
 							if(e.choice==choice) {
 								e.votes = e.votes+1
 							} return e;

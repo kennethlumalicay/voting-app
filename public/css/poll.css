@@ -1,0 +1,80 @@
+#chart {
+	background-color: rgba(0,0,0,0.5);
+	margin: 10px;
+}
+#content-wrap {
+	margin: 10px;
+}
+#content-wrap, #choices-form, #choices-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+}
+#choices-container {
+	margin-bottom: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+}
+#choices {
+	display: flex;
+	flex-wrap: wrap;
+}
+.option {
+	text-align: center;
+	padding: 0;
+	margin: 2px 2px;
+	font-size: 1em;
+	text-decoration: none;
+	color: black;
+	border: 1px solid rgba(0,0,0,0.6);
+	border-radius: 1px;
+	background-color: rgba(175,238,238,0.7);
+	transition: all 0.5s ease-in-out;
+}
+.option:hover {
+	background-color: rgba(175,238,238,1);
+}
+.option > label {
+	padding: 5px 20px;
+	font-size: 1.2em;
+}
+#other-t {
+	font-size: 1em;
+	padding: 5px 25px;
+	border: 0;
+	outline: none;
+	background-color: rgba(0,0,0,0.7);
+}
+#submit-btn {
+	font-size: 2em;
+	background-color: rgba(175,238,238,0.7);
+	border: 1px solid rgba(0,0,0,0.6);
+	outline: none;
+	color: rgba(0,0,0,0.8);
+	padding: 3px 20px;
+	transition: all 1s ease-in-out;
+	max-width: 250px;
+	align-self: center;
+}
+#submit-btn:hover {
+	background-color: rgba(175,238,238,1);
+	color: rgba(0,0,0,1);
+}
+.radio {
+	border: 1px solid black;
+	padding: 5px;
+	outline: none;
+	-webkit-appearance: inherit;
+	transition: all 0.25s ease-in-out;
+}
+.radio:hover {
+	border: 5px solid black;
+	padding: 1px;
+}
+.radio:checked {
+	border: 5px solid black;
+	padding: 1px;
+}

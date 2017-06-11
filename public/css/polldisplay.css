@@ -1,10 +1,14 @@
 .poll-item {
-	padding: 2px 5px;
+	padding: 5px 25px;
 	margin: 2px 2px;
-	font-size: 1.5em;
+	font-size: 2em;
 	text-decoration: none;
 	color: black;
-	border: 1px solid black;
+	border: 1px solid rgba(0,0,0,0.6);
 	border-radius: 1px;
-	background-color: paleturquoise;
+	background-color: rgba(175,238,238,0.7);
+	transition: all 0.5s ease-in-out;
+}
+.poll-item:hover {
+	background-color: rgba(175,238,238,1);
 }

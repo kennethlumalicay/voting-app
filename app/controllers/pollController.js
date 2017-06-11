@@ -10,7 +10,9 @@
   function show() {
     var htmlStr = [];
     infoArr.forEach((val, i) => {
-      htmlStr.push("<span class=\"option\"><input type=\"radio\" name=\"choice\" value=\""+val[0]+"\">"+val[0]+"</span>");
+      htmlStr.push("<span class=\"option\"><input id=\""+i+
+        "\"type=\"radio\" name=\"choice\" class=\"radio\" value=\""
+        +val[0]+"\">"+"<label for=\""+i+"\">"+val[0]+"</label></span>");
     });
     $('#choices').append(htmlStr.join(''));
   }
@@ -30,12 +32,19 @@
   // Draw the chart and set the chart values
   function drawChart() {
     var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Option');
-        data.addColumn('number', 'Votes');
-        data.addRows(infoArr);
+    data.addColumn('string', 'Option');
+    data.addColumn('number', 'Votes');
+    data.addRows(infoArr);
 
     // Optional; add a title and set the width and height of the chart
-    var options = {'title':titleP, 'width':500, 'height':500};
+    var options = {'title':titleP, 'width':350, 'height':300,
+        'chartArea': {'left': 50, 'top': 50, 'width': '95%', 'height': '95%'},
+        'backgroundColor': 'transparent', 'fontSize': 17, 'fontName': 'Verdana',
+        'is3D': true, 'legend.position': 'labeled', 'legend.textStyle': {'color': 'turquoise',
+        'fontName': 'Verdana', 'fontSize':17}, 'chartArea.backgroundColor':'transparent',
+        'titleTextStyle': {'color': 'turquoise', 'fontName':'Verdana', 'fontSize':25,
+        'bold': true}
+    };
 
     // Display the chart inside the <div> element with id="piechart"
     var chart = new google.visualization.PieChart(document.getElementById('chart'));
@@ -48,4 +57,9 @@
     } else {
       $('#other-t').prop("disabled",true).prop("required", false);
     }
+  });
+
+  $('.options').on('click', function() {
+    console.log("inside .options");
+    this.find('input:radio[name=choice]').attr('checked', true);
   });

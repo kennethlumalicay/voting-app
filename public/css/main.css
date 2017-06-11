@@ -4,6 +4,9 @@ body, html {
 	margin: 0;
 	padding: 0;
 	font-family: 'Montserrat', sans-serif;
+	background-image: url(../img/bg.jpg);
+	background-size: cover;
+	color: rgba(255,255,255,0.8);
 }
 header {
 	display: flex;
@@ -14,8 +17,8 @@ header {
 }
 header > h1 {
 	text-align: center;
-	font-size: 4em;
-	margin-bottom: 20px;
+	font-size: 5em;
+	margin: 10px;
 }
 #nav, #content {
 	display: flex;
@@ -25,11 +28,19 @@ header > h1 {
 }
 #nav > a {
 	margin: 2px 15px;
-	padding: 1px 10px;
+	padding: 8px 15px;
 	text-decoration: none;
-	color: black;
-	border-left: 1px solid black;
-	border-right: 1px solid black;
+	color: rgba(255,255,255,0.8);
+	border-left: 3px solid rgba(255,255,255,0.8);
+	border-right: 3px solid rgba(255,255,255,0.8);
+	font-size: 1.8em;
+	transform: rotate(0deg);
+	transition: all 1s ease-in-out;
+}
+#nav > a:hover {
+	border-left: 3px solid rgba(0,0,0,0);
+	border-right: 3px solid rgba(0,0,0,0);
+	transform: translateY(10px);
 }
 .hide {
 	display: none;
