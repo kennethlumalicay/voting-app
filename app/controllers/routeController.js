@@ -24,7 +24,7 @@ function RouteController () {
 		var ownerId = req.user.github.id;
 		var id = new Date().getTime().toString(16);
 		var title = req.body.title;
-		var choices = req.body.options.replace(/\./gi, '').split(/ , |, | ,|,/g);
+		var choices = req.body.options.replace(/\n|\r/gi, '').trim().split(/ , |, | ,|,/g);
 		choices = choices.map(e=>({choice: e, votes: 0}));
 
 		var newPollItem = new Polls({
@@ -48,7 +48,7 @@ function RouteController () {
 		Polls.findOne({ "poll.id" : req.params.id}, function(err, data) {
 			if(err) throw err;
 			else {
-				var arr = data.poll.choices.map(e=>[e.choice.replace(/\r|\n/gi, '').trim(),e.votes]);
+				var arr = data.poll.choices.map(e=>[e.choice,e.votes]);
 				res.render('poll', {
 					logged: logged,
 					pollId: data.poll.id,
