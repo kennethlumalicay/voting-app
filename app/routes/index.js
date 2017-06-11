@@ -13,19 +13,24 @@ module.exports = function (app, passport) {
 			console.log("User is logged in.");
 			//NavController.changeNav(true);
 			logged = true;
+			return next();
 		} else {
 			//res.redirect('/login');
 			console.log("User is signed out.");
+			console.log("req",req.url);
 			//NavController.changeNav(false);
 			logged = false;
-		} return next();
+			if(req.url == '/') return next();
+			else res.redirect('/');
+		}
 	}
 	function getLogged() {
 		return logged;
 	}
 
+
 	app.route('/') // removed isloggedin
-		.get(isLoggedIn, function (req, res) {
+		.get(isLoggedIn,function (req, res) {
 			res.render('index', {logged: getLogged()});
 		});
 
@@ -41,12 +46,12 @@ module.exports = function (app, passport) {
 		});
 
 	app.route('/mypolls') // removed isloggedin
-		.get(function (req, res) {
+		.get(isLoggedIn,function (req, res) {
 			res.render('mypolls', {logged: getLogged()});
 		});
 
 	app.route('/newpoll') // removed isloggedin
-		.get(function (req, res) {
+		.get(isLoggedIn,function (req, res) {
 			res.render('newpoll', {logged: getLogged()});
 		});
 
