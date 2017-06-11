@@ -4,6 +4,8 @@
 	<head>
 		<title>Voting App</title>
 		<link href="/public/css/main.css" rel="stylesheet" type="text/css">
+		<link href="/public/css/mypolls.css" rel="stylesheet" type="text/css">
+		<link href="/public/css/poll.css" rel="stylesheet" type="text/css">
 		<script
 			src="https://code.jquery.com/jquery-3.2.1.min.js"
 			integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -23,7 +25,8 @@
 	</header>
 	<body>
 		<div id="content">
-			<h1>My Polls</h1>
+			<%- htmlStr %>
 		</div>
+		<script type="text/javascript" src="/controllers/mypollsController.js"></script>
 	</body>
 </html>

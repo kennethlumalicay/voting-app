@@ -1,8 +1,7 @@
 'use strict';
 
 var path = process.cwd();
-
-var NavController = require(path + '/app/controllers/navController.js');
+var RouteController = require('../controllers/routeController.js')
 
 module.exports = function (app, passport) {
 
@@ -11,14 +10,10 @@ module.exports = function (app, passport) {
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {
 			console.log("User is logged in.");
-			//NavController.changeNav(true);
 			logged = true;
 			return next();
 		} else {
-			//res.redirect('/login');
 			console.log("User is signed out.");
-			console.log("req",req.url);
-			//NavController.changeNav(false);
 			logged = false;
 			if(req.url == '/') return next();
 			else res.redirect('/');
@@ -28,10 +23,11 @@ module.exports = function (app, passport) {
 		return logged;
 	}
 
+	var routeController = new RouteController();
 
-	app.route('/') // removed isloggedin
+	app.route('/')
 		.get(isLoggedIn,function (req, res) {
-			res.render('index', {logged: getLogged()});
+			routeController.getPolls(req,res,'index',getLogged());
 		});
 
 	app.route('/login')
@@ -45,15 +41,18 @@ module.exports = function (app, passport) {
 			res.redirect('/');
 		});
 
-	app.route('/mypolls') // removed isloggedin
+	app.route('/mypolls')
 		.get(isLoggedIn,function (req, res) {
-			res.render('mypolls', {logged: getLogged()});
+			routeController.getPolls(req,res,'mypolls',getLogged());
 		});
 
-	app.route('/newpoll') // removed isloggedin
+	app.route('/newpoll')
 		.get(isLoggedIn,function (req, res) {
 			res.render('newpoll', {logged: getLogged()});
 		});
+
+	app.route('/newpoll/submit')
+		.post(isLoggedIn,routeController.newPoll);
 
 	app.route('/auth/github')
 		.get(passport.authenticate('github'));

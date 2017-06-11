@@ -10,15 +10,18 @@ header {
 	flex-direction: column;
 	justify-content: center;
 	align-content: center;
+	margin-bottom: 40px;
 }
 header > h1 {
 	text-align: center;
 	font-size: 4em;
+	margin-bottom: 20px;
 }
 #nav, #content {
 	display: flex;
 	justify-content: center;
 	align-content: center;
+	flex-wrap: wrap;
 }
 #nav > a {
 	margin: 2px 15px;
