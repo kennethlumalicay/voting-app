@@ -37,12 +37,12 @@
     data.addRows(infoArr);
 
     // Optional; add a title and set the width and height of the chart
-    var options = {'title':titleP, 'width':350, 'height':300,
-        'chartArea': {'left': 50, 'top': 50, 'width': '95%', 'height': '95%'},
-        'backgroundColor': 'transparent', 'fontSize': 17, 'fontName': 'Verdana',
-        'is3D': true, 'legend.position': 'labeled', 'legend.textStyle': {'color': 'turquoise',
-        'fontName': 'Verdana', 'fontSize':17}, 'chartArea.backgroundColor':'transparent',
-        'titleTextStyle': {'color': 'turquoise', 'fontName':'Verdana', 'fontSize':25,
+    var options = {'title':titleP, 'width':500, 'height':250,
+        'chartArea': {'left': 0, 'top': 25, 'width': '100%', 'height': '100%'},
+        'backgroundColor': 'transparent', 'fontSize': 20, 'fontName': 'Verdana',
+        'is3D': true,  legend: { position: 'labeled', 'textStyle': {'color': 'turquoise',
+        'fontName': 'Verdana', 'fontSize':17}}, 'chartArea.backgroundColor':'transparent',
+        'titleTextStyle': {'color': 'turquoise', 'fontName':'Verdana', 'fontSize':15,
         'bold': true}
     };
 

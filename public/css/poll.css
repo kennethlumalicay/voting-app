@@ -2,31 +2,25 @@
 	background-color: rgba(0,0,0,0.5);
 	margin: 10px;
 }
+#content {
+	flex-wrap: nowrap;
+}
 #content-wrap {
 	margin: 10px;
 }
-#content-wrap, #choices-form, #choices-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-content: center;
-}
-#choices-container {
-	margin-bottom: 20px;
+#choices-container, #content-wrap {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
-	align-content: center;
+	margin-bottom: 20px;
 }
 #choices {
-	display: flex;
-	flex-wrap: wrap;
 }
 .option {
+	display: inline-block;
 	text-align: center;
 	padding: 0;
 	margin: 2px 2px;
-	font-size: 1em;
+	font-size: 1.5em;
 	text-decoration: none;
 	color: black;
 	border: 1px solid rgba(0,0,0,0.6);
